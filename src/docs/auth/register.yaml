@@ -1,0 +1,48 @@
+User Registration
+---
+tags:
+  - Authentication
+parameters:
+  - name: body
+    description: The body should contain the user data
+    in: body
+    required: true
+    schema:
+      type: object
+      required:
+        - "email"
+        - "fullname"
+      properties:
+        email:
+          type: "email"
+          example: "ola@gmail.com"
+        fullname:
+          type: "fullname"
+          example: "Ola Fat"
+responses:
+  201:
+    description: Succesfuly created a user. User required to check mail for verification code
+    schema:
+      properties:
+        data: 
+          type: object
+          properties:
+            temp_id:
+              type: id
+              example: "8864d164-3047-4e2c-bca1-43e55b00c47a"
+        msg:
+          type: string
+          example: Email sent successfuly
+  400:
+    description: Fails to Register due to bad request data
+    schema:
+      properties:
+        msg:
+          example: Email not valid
+
+  409:
+    description: When an email has been used
+    schema:
+      properties:
+        msg:
+          example: Email has been used

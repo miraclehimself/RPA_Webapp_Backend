@@ -1,0 +1,35 @@
+User Registration
+---
+tags:
+  - Authentication
+parameters:
+  - name: body
+    description: The body should contain the user temp id and inputed otp
+    in: body
+    required: true
+    schema:
+      type: object
+      required:
+        - "temp_id"
+        - "otp"
+      properties:
+        email:
+          type: "temp_id"
+          example: "8864d164-3047-4e2c-bca1-43e55b00c47a"
+        fullname:
+          type: "otp"
+          example: "00000"
+responses:
+  200:
+    description: OTP verification successful
+    properties:
+        msg:
+          example: Verification successful
+
+  400:
+    description: Fails to Register due to bad request data
+
+  409:
+    description: When an email has been used
+  422:
+    description: OTP expired or incorrect

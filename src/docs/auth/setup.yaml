@@ -1,0 +1,89 @@
+User Registration
+---
+tags:
+  - Authentication
+parameters:
+  - name: body
+    description: The body should contain the user data
+    in: body
+    required: true
+    schema:
+      type: object
+      required:
+        - "temp_id"
+        - "passworrd"
+        - "robot_name"
+        - "workspace_name"
+        - "workspace_url"
+      properties:
+        temp_id:
+          type: "id"
+          example: "b36b852f-2ab5-4325-8096-f8bf355c500c"
+        password:
+          type: "password"
+          example: "******"
+        robot_name:
+          type: "string"
+          example: "ola"
+        workspace_url:
+          type: "string"
+          example: "olafat"
+        workspace_name:
+          type: "string"
+          example: "olafat"
+responses:
+  201:
+    description: Succesfuly created setup the user profile and workspace.
+    schema:
+      properties:
+        data: 
+          type: object
+          properties:
+            access_token:
+              type: token
+              example: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY1MzI0Mjg2NSwianRpIjoiZjY1OTM4YTktOGU5YS00NjcxLWE1MDYtNTRjOTBlZjY2MGE4IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJ1c2VyaWQiOiI3OGEzNmExNS1lNmYzLTQ0MWItYTkyMC04NTM2MTVjOTYzOTkiLCJ3b3Jrc3BhY2VpZCI6ImIwNzRhZDBjLThlNmItNGI3My04NmE3LWM0YjdmNDJiZWZjMiIsInVzZXJyb2xlIjoib3duZXIifSwibmJmIjoxNjUzMjQyODY1LCJleHAiOjE2NTMyNDM3NjV9.dKvtCaTxmBylWBrr53qdgzU-F9NbvU332SPoqsDLLUM"
+            refresh_token:
+              type: token
+              example: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY1MzI0Mjg2NSwianRpIjoiYzkxNDAwMzgtNjY2ZS00NjcwLWI4ZTMtMWJjMzJmN2I0MGJhIiwidHlwZSI6InJlZnJlc2giLCJzdWIiOnsidXNlcmlkIjoiNzhhMzZhMTUtZTZmMy00NDFiLWE5MjAtODUzNjE1Yzk2Mzk5Iiwid29ya3NwYWNlaWQiOiJiMDc0YWQwYy04ZTZiLTRiNzMtODZhNy1jNGI3ZjQyYmVmYzIiLCJ1c2Vycm9sZSI6Im93bmVyIn0sIm5iZiI6MTY1MzI0Mjg2NSwiZXhwIjoxNjU1ODM0ODY1fQ.NpQ1tQKfPTP2TSXKGivq5iaD3FOFohazTODe6AJR1Vk"
+            user: 
+              type: object
+              properties:
+                email:
+                  example: ola@email.com
+                fullname:
+                  example: "Fat Ola"
+            workspace: 
+              type: object
+              properties:
+                created_at:
+                  example: "2022-05-22T19:07:19.153611"
+                id:
+                  example: "b074ad0c-8e6b-4b73-86a7-c4b7f42befc2"
+                name:
+                  example: "olafat"
+                updated_at: 
+                  example: "2022-05-22T19:07:19.153611"
+                url:
+                  example: "olafat"
+        msg:
+          type: string
+          example: "Setup successful"
+  400:
+    description: Fails to Register due to bad request data
+    schema:
+      properties:
+        msg:
+          example: Password is too short
+  404:
+    description: Fails to Register due to wrong user temp id
+    schema:
+      properties:
+        msg:
+          example: User not found
+
+  409:
+    description: When a workspace name or url has been used
+    schema:
+      properties:
+        msg:
+          example: Workspace name has been used

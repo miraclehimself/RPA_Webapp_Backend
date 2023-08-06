@@ -1,0 +1,86 @@
+Workspace Data
+---
+tags:
+  - Workspace
+parameters:
+  - name: Header
+    description: The header should contail authorization token
+    in: Authorization
+    required: true
+    schema:
+      type: object
+      required:
+        - "Authorization"
+      properties:
+        Authorization:
+          type: "Bearer token"
+          example: "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY1MzQxNzMyMSwianRpIjoiYmE5Y2ZkMzktMGZhZC00OGZhLTlhMGQtZmU5MjdjNjliMzM2IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJ1c2VyaWQiOiIyNWU1MjgwYi1lNTVkLTRmZWItOTEzMC00NmVkMmIxODJhNzUiLCJ3b3Jrc3BhY2VpZCI6IjkwZmJhYTA0LWVhYjAtNDRmYi1iZjI1LWE3MjMzOTJjNDBkMyIsInVzZXJyb2xlIjoib3duZXIifSwibmJmIjoxNjUzNDE3MzIxLCJleHAiOjE2NTM0MTgyMjF9.5V2scEXA6AFk442-DCzKKfKihxnfeTP6LxwSUwXXfeI"
+responses:
+  200:
+    description: Succesfuly retrived workspace data.
+    schema:
+      properties:
+        data: 
+          type: object
+          poperties:
+            flow:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    example:  test flow
+                  version:
+                    example: 1
+                  created_at: 
+                    example: "2022-05-24T18:28:39.302940"
+                  id: 
+                    example: "4df7a6ba-1f36-4581-9f55-d249e0b786ee"
+                  flow_data:
+                    type: array
+                    items: 
+                      type: object
+                  updated_at: 
+                    example: "2022-05-24T18:28:39.302940"
+                  workspace_id:
+                    example: "90fbaa04-eab0-44fb-bf25-a723392c40d3" 
+            robots:
+              type: array
+              items:
+                type: object
+                properties:
+                  created_at:
+                    example: "2022-05-24T18:28:39.302940"
+                  id:
+                    example:  "4df7a6ba-1f36-4581-9f55-d249e0b786ee"
+                  name: 
+                    example: "ola"
+                  script: 
+                    example: null,
+                  status: 
+                    example: "Disconnected"
+                  token: "2022-05-24T18:28:39.302940"
+                  type: "Development"
+                  updated_at: "2022-05-24T18:28:39.302940"
+                  workspace_id: "90fbaa04-eab0-44fb-bf25-a723392c40d3"
+
+            users:
+              type: arrar
+              items:
+                type: object
+                properties:
+                  created_at: "2022-05-24T18:28:39.286339"
+                  email: "ola@gmail.com"
+                  fullname: "Fat Ola"
+                  id: "25e5280b-e55d-4feb-9130-46ed2b182a75"
+                  updated_at: "2022-05-24T18:28:39.286339"
+        msg:
+          type: string
+          example: "Workspace stat retrived"
+  401:
+    description: Invalid or expired token
+    schema:
+      properties:
+        msg:
+          example: Token has expired
